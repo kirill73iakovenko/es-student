@@ -7,3 +7,4 @@ code 1.140.0
 picotool v2.3.0 (Windows, GNU-16.1.0, Release)
 pico-sdk 2.3.0
 PICO_SDK_PATH=C:\Repositories\pico\pico-sdk\
+trigger check 1.2.1 10/13/2026 11:14:25
