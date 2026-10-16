@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 import serial
-from serial.tools import list_ports
+from serialgit.tools import list_ports
 
 VENDOR_ID = 0x2E8A
 PRODUCT_ID = 0x000A
