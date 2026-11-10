@@ -40,6 +40,9 @@ struct info_t device_card = {
 
 void dev_info(void){
 
+    printf("- %-13s %-10s %5s %6s %10s\n",
+           "struct", "address", "size", "offset", "value");
+
     printf("- %-13s 0x%08x %5u %6u 0x%08x\n",
            "version",
            &device_card.version,
@@ -62,7 +65,7 @@ void dev_info(void){
     
     unsigned fields = sizeof(device_card.version) 
     + sizeof(device_card.name) + sizeof(device_card.revision);
-    unsigned real_size = sizeof(struct info_t);
+    unsigned real_size = sizeof(device_card);
     unsigned padding = real_size - fields;
     printf("fields %u, sizeof %u, padding %u\n", fields, real_size, padding);
 }
