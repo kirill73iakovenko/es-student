@@ -157,7 +157,7 @@ void boot_info(void)
     printf("%-15s 0x%08x\n", "  reset (even)", reset_even);
     printf("%-15s 0x%08x\n", "  gpio in", (uint32_t)gpio_in);
     printf("%-15s %u\n", "  led bit", level);
-    printf("%-15s %d\n", "  gpio get", sdk_value);
+    printf("%-15s %d\n", "  gpio_get", sdk_value);
 }
 
 
