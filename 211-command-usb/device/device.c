@@ -20,6 +20,7 @@ void device_info(void)
         SYSINFO_CHIP_ID_REVISION_LSB;
     
     
+    
 
     printf("project: %s\n", DEVICE_PROJECT);
     printf("repo: %s\n", DEVICE_REPO);
@@ -27,8 +28,5 @@ void device_info(void)
     printf("serial: %s\n", board_id);
     printf("chip: manufacturer 0x%03x, part 0x%04x, revision %u\n", 
         manufacturer, part, revision);
-     printf("pico-sdk: %u.%u.%u\n", 
-        PICO_SDK_VERSION_MAJOR, 
-        PICO_SDK_VERSION_MINOR, 
-        PICO_SDK_VERSION_REVISION);
+    printf("pico-sdk: %s\n", PICO_SDK_VERSION_STRING);
 }
