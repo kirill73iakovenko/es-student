@@ -3,26 +3,26 @@
 устройство: 2e8a:000a
 серийный номер: E66098F29B2A2A39
 порт: COM3
-начало: 2026-11-10T10:43:44
+начало: 2026-11-10T11:04:51
    0.000 --> enable
    0.125 <-- enable
    0.125 <-- dbg read_line:72 got enable
    0.125 <-- inf handle_command:34 led on
-   2.171 --> disable
-   2.312 <-- disable
-   2.312 <-- dbg read_line:72 got disable
-   2.312 <-- inf handle_command:39 led off
-   4.343 --> info
-   4.437 <-- info
-   4.437 <-- dbg read_line:72 got info
-   4.437 <-- project: 211-command-usb
-   4.437 <-- repo: https://github.com/kirill73iakovenko/es-student
-   4.437 <-- board: pico
-   4.437 <-- serial: E66098F29B2A2A39
-   4.437 <-- chip: manufacturer 0x927, part 0x0002, revision 1
-   4.437 <-- pico-sdk: 2.3.0
-   6.468 --> nosuchcommand
-   6.734 <-- nosuchcommand
-   6.734 <-- dbg read_line:72 got nosuchcommand
-   6.734 <-- err handle_command:51 unknown command: �
+   2.187 --> disable
+   2.328 <-- disable
+   2.328 <-- dbg read_line:72 got disable
+   2.328 <-- inf handle_command:39 led off
+   4.375 --> info
+   4.453 <-- info
+   4.453 <-- dbg read_line:72 got info
+   4.453 <-- project: 211-command-usb
+   4.453 <-- repo: https://github.com/kirill73iakovenko/es-student
+   4.453 <-- board: pico
+   4.469 <-- serial: E66098F29B2A2A39
+   4.469 <-- chip: manufacturer 0x927, part 0x0002, revision 1
+   4.469 <-- pico-sdk: 2.3.0
+   6.516 --> nosuchcommand
+   6.781 <-- nosuchcommand
+   6.781 <-- dbg read_line:72 got nosuchcommand
+   7.297 <-- err handle_command:51 unknown command: nosuchcommand
 итог: отправлено команд 4, принято строк 17
