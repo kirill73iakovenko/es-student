@@ -2,8 +2,12 @@
 #include <stdint.h>
 #include <hardware/regs/addressmap.h>
 #include <pico/stdlib.h>
+#include "../command.h"
+#include <stdlib.h>
+#include "../device/device.h"
 
-
+uint32_t data_variable = 100;
+uint32_t bss_variable;
 
 extern char __flash_binary_start;
 extern char __flash_binary_end;
@@ -17,6 +21,10 @@ extern char __bss_end__;
 extern char __HeapLimit;
 extern char __StackBottom;
 extern char __StackTop;
+
+
+int main(void);
+
 
 static void row(const char *name, uintptr_t start, uintptr_t end)
 {
@@ -86,4 +94,46 @@ void mem_info(void)
     printf("  ram free    %8u for heap and %u for stack\n", 
            (unsigned)ram_free_size, 
            (unsigned)stack_size);
+}
+
+void fw_info(void)
+{
+    data_variable += 1;
+    bss_variable += 1;
+    
+    
+    uint16_t *main_code = (uint16_t *)((uintptr_t)main & ~1u);
+    uint16_t *fw_code = (uint16_t *)((uintptr_t)fw_info & ~1u);
+
+    uint32_t stack_variable = 1946;
+    uint32_t *heap_variable = malloc(sizeof(uint32_t));
+
+    if (heap_variable != NULL)
+    {
+        *heap_variable = 1951;
+    }
+
+
+    printf("\n%-12s %-12s %s\n", "object", "address", "value");
+    printf("%-12s 0x%08x   0x%04x \n", "main", (uintptr_t)main, *main_code);
+    printf("%-12s 0x%08x   0x%04x \n", "fw_info", (uintptr_t)fw_info, *fw_code);
+
+    printf("%-12s 0x%08x\n", "commands", (uintptr_t)&commands[0]);
+    for (uint i = 0; i<command_count; i++)
+    {
+        uint16_t *cmd_code = (uint16_t *)((uintptr_t)commands[i].handler & ~1u);
+        printf("%-12s 0x%08x   0x%04x \n", commands[i].name, (uintptr_t)commands[i].handler, 
+        *cmd_code);
+    }
+
+    printf("%-12s 0x%08x   \"%s\"\n", "DEVICE_PROJECT", (uintptr_t)DEVICE_PROJECT, DEVICE_PROJECT);
+    printf("%-12s 0x%08x   \"%s\"\n", "DEVICE_BOARD",   (uintptr_t)DEVICE_BOARD,   DEVICE_BOARD);
+    printf("%-12s 0x%08x   %d\n", "data_variable", (uintptr_t)&data_variable, data_variable);
+    printf("%-12s 0x%08x   %d\n", "bss_variable", (uintptr_t)&bss_variable, bss_variable);
+    printf("%-12s 0x%08x   %u\n", "stack_variable", (uintptr_t)&stack_variable, stack_variable);
+    printf("%-12s 0x%08x   %u\n", "heap_variable", (uintptr_t)heap_variable, *heap_variable);
+    free(heap_variable);
+    
+
+
 }
