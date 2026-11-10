@@ -3,13 +3,13 @@
 устройство: 2e8a:000a
 серийный номер: E66098F29B2A2A39
 порт: COM3
-начало: 2026-11-10T18:40:34
+начало: 2026-11-10T18:43:51
    0.000 --> dev_info
    0.172 <-- dev_info
    0.172 <-- dbg read_line:122 got dev_info
-   0.172 <-- - struct        address     size offset      value
-   0.187 <-- - version       0x20000f40     4      0 0x00020300
-   0.187 <-- - name          0x20000f44    13      4 0x20000f44
-   0.187 <-- - revision      0x20000f51     1     17 0x00000001
-   0.187 <-- fields 18, sizeof 20, padding 2
+   0.172 <-- struct        address     size offset      value
+   0.172 <-- - version       0x20000f40     4      0 0x00020300
+   0.172 <-- - name          0x20000f44    13      4 0x20000f44
+   0.172 <-- - revision      0x20000f51     1     17 0x00000001
+   0.188 <-- fields 18, sizeof 20, padding 2
 итог: отправлено команд 1, принято строк 7
