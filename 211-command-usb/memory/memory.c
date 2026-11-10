@@ -8,6 +8,8 @@
 #include "memory.h"
 #include "led.h"
 
+#define VECTOR_TABLE 0x10000100
+
 uint32_t data_variable = 100;
 uint32_t bss_variable;
 
@@ -151,7 +153,7 @@ void boot_info(void)
 
     printf("%-15s 0x%08x\n", "vector table", (uint32_t)VECTOR_TABLE);
     printf("%-15s 0x%08x\n", "  stack top", stack_top);
-    printf("%-15s 0x%08x\n", "  reset handler", reset_handler);
+    printf("%-15s 0x%08x\n", "  reset", reset_handler);
     printf("%-15s 0x%08x\n", "  reset (even)", reset_even);
     printf("%-15s 0x%08x\n", "  gpio in", (uint32_t)gpio_in);
     printf("%-15s %u\n", "  led bit", level);
