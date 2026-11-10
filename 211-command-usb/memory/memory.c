@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <hardware/regs/addressmap.h>
 #include <pico/stdlib.h>
-#include "../command.h"
+#include "command.h"
 #include <stdlib.h>
-#include "../device/device.h"
+#include "device.h"
 
 uint32_t data_variable = 100;
 uint32_t bss_variable;
