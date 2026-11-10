@@ -1,6 +1,7 @@
 #include "device.h"
 
 #include <stdio.h>
+#include <stddef.h>
 #include "pico/unique_id.h"
 #include "hardware/regs/addressmap.h"
 #include "pico/version.h"
@@ -30,3 +31,40 @@ void device_info(void)
         manufacturer, part, revision);
     printf("pico-sdk: %s\n", PICO_SDK_VERSION_STRING);
 }
+
+struct info_t device_card = {
+    .version = 0x00020300,
+    .name = "211-cmd-usb",
+    .revision = 1   
+};
+
+void dev_info(void){
+
+    printf("- %-13s 0x%08x %5u %6u 0x%08x\n",
+           "version",
+           &device_card.version,
+           sizeof(device_card.version),
+           offsetof(struct info_t, version),
+           device_card.version);
+    printf("- %-13s 0x%08x %5u %6u 0x%08x\n",
+           "name",
+           &device_card.name,
+           sizeof(device_card.name),
+           offsetof(struct info_t, name),
+           device_card.name);
+
+    printf("- %-13s 0x%08x %5u %6u 0x%08x\n",
+           "revision",
+           &device_card.revision,
+           sizeof(device_card.revision),
+           offsetof(struct info_t, revision),
+           device_card.revision);
+    
+    unsigned fields = sizeof(device_card.version) 
+    + sizeof(device_card.name) + sizeof(device_card.revision);
+    unsigned real_size = sizeof(struct info_t);
+    unsigned padding = real_size - fields;
+    printf("fields %u, sizeof %u, padding %u\n", fields, real_size, padding);
+}
+    
+
