@@ -43,6 +43,11 @@ void dev_info(void){
     printf("%-13s %-10s %5s %6s %10s\n",
            "struct", "address", "size", "offset", "value");
 
+     printf("- %-13s 0x%08x %5u\n",
+           "device_card",
+           (unsigned int)&device_card,
+           (unsigned int)sizeof(device_card));
+
     printf("- %-13s 0x%08x %5u %6u 0x%08x\n",
            "version",
            &device_card.version,
