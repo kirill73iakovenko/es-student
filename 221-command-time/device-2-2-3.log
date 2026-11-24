@@ -3,14 +3,14 @@
 устройство: 2e8a:000a
 серийный номер: E66098F29B2A2A39
 порт: COM3
-начало: 2026-11-24T14:24:28
-   0.000 --> calc_pi
-   0.000 <-- calc_pi
-   0.000 <-- dbg read_line:153 got calc_pi
+начало: 2026-11-24T14:27:30
+   0.015 --> calc_pi
+   0.015 <-- calc_pi
+   0.015 <-- dbg read_line:155 got calc_pi
    1.031 --> uptime
    4.703 <-- pi: 3.14159165
    4.703 <-- time: 4698 ms
    4.703 <-- uptime
-   4.703 <-- dbg read_line:153 got uptime
-   4.703 <-- uptime: 153383 ms
+   4.703 <-- dbg read_line:155 got uptime
+   4.703 <-- uptime: 16123 ms
 итог: отправлено команд 2, принято строк 7
