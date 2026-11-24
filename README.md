@@ -20,3 +20,4 @@
 ![](https://github.com/kirill73iakovenko/es-student/actions/workflows/check-2-1-5.yml/badge.svg)
 ![](https://github.com/kirill73iakovenko/es-student/actions/workflows/check-2-1-6.yml/badge.svg)
 ![](https://github.com/kirill73iakovenko/es-student/actions/workflows/check-2-2-1.yml/badge.svg)
+![](https://github.com/kirill73iakovenko/es-student/actions/workflows/check-2-2-2.yml/badge.svg)
