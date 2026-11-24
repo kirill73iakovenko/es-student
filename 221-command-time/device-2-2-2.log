@@ -1,0 +1,63 @@
+задание: 2.2.2
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: E66098F29B2A2A39
+порт: COM3
+начало: 2026-11-24T14:11:02
+   0.000 --> uptime
+   0.000 <-- uptime
+   0.000 <-- dbg read_line:126 got uptime
+   0.000 <-- uptime: 376877 ms
+   0.422 --> boot_info
+   0.422 <-- boot_info
+   0.422 <-- dbg read_line:126 got boot_info
+   0.422 <-- vector table    0x10000100
+   0.422 <-- stack top     0x20042000
+   0.422 <-- reset         0x100001f7
+   0.422 <-- reset (even)  0x100001f6
+   0.422 <-- gpio in       0xd0000004
+   0.422 <-- led bit       0
+   0.422 <-- gpio_get      0
+   0.828 --> uptime
+   0.828 <-- uptime
+   0.828 <-- dbg read_line:126 got uptime
+   0.828 <-- uptime: 377700 ms
+   1.234 --> boot_info
+   1.234 <-- boot_info
+   1.234 <-- dbg read_line:126 got boot_info
+   1.234 <-- vector table    0x10000100
+   1.234 <-- stack top     0x20042000
+   1.234 <-- reset         0x100001f7
+   1.234 <-- reset (even)  0x100001f6
+   1.234 <-- gpio in       0xd0000004
+   1.250 <-- led bit       0
+   1.250 <-- gpio_get      0
+   1.656 --> uptime
+   1.656 <-- uptime
+   1.656 <-- dbg read_line:126 got uptime
+   1.656 <-- uptime: 378528 ms
+   2.063 --> boot_info
+   2.063 <-- boot_info
+   2.063 <-- dbg read_line:126 got boot_info
+   2.063 <-- vector table    0x10000100
+   2.063 <-- stack top     0x20042000
+   2.063 <-- reset         0x100001f7
+   2.063 <-- reset (even)  0x100001f6
+   2.063 <-- gpio in       0xd0000004
+   2.063 <-- led bit       1
+   2.063 <-- gpio_get      1
+   2.484 --> uptime
+   2.484 <-- uptime
+   2.484 <-- dbg read_line:126 got uptime
+   2.484 <-- uptime: 379352 ms
+   2.891 --> boot_info
+   2.891 <-- boot_info
+   2.891 <-- dbg read_line:126 got boot_info
+   2.891 <-- vector table    0x10000100
+   2.891 <-- stack top     0x20042000
+   2.891 <-- reset         0x100001f7
+   2.891 <-- reset (even)  0x100001f6
+   2.891 <-- gpio in       0xd0000004
+   2.891 <-- led bit       1
+   2.891 <-- gpio_get      1
+итог: отправлено команд 8, принято строк 48
