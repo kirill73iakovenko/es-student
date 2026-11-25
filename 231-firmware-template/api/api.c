@@ -11,8 +11,8 @@
 
 #include "log.h"
 #include "device.h"
-#include "led.h"
 #include "profiling.h"
+#include "led-task.h"
 
 
 #ifndef CALC_PI_DEFAULT_TERMS
@@ -112,7 +112,80 @@ static void cmd_main_time_reset(const command_t *cmd)
     printf("max reset\r\n");
 }
 
-// ── Таблица: только обычные команды, help — НЕ в таблице ──
+static void print_led_state(void)
+{
+    led_state_t state = led_task_get_state();
+    const char *state_str;
+
+    switch (state) {
+    case LED_STATE_OFF:
+        state_str = "off";
+        break;
+
+    case LED_STATE_ON:
+        state_str = "on";
+        break;
+
+    case LED_STATE_BLINK:
+        state_str = "blink";
+        break;
+
+    default:
+        state_str = "unknown";
+        break;
+    }
+
+    uint32_t period_ms = led_task_get_period_ms();
+
+    printf("led: %s, period: %u ms\r\n",
+           state_str, (unsigned int)period_ms);
+}
+
+static void cmd_led_enable(const command_t *command)
+{
+    (void)command;
+    led_task_set_state(LED_STATE_ON);
+    print_led_state();
+
+}
+
+static void cmd_led_disable(const command_t *command)
+{
+    (void)command;
+    led_task_set_state(LED_STATE_OFF);
+    print_led_state();
+
+}
+
+static void cmd_led_blink(const command_t *command)
+{
+    (void)command;
+    led_task_set_state(LED_STATE_BLINK);
+    print_led_state();
+}
+
+static void cmd_led_period(const command_t *command)
+{
+    uint32_t period_ms;
+
+    if (command->argc != 1 || !parse_u32(command->argv[0], &period_ms))
+    {
+        printf("error: usage led_period <period_ms>\n");
+        return;
+    }
+
+    // годится ли такой период, решает задача светодиода
+    if (!led_task_set_period_ms(period_ms))
+    {
+        printf("error: period_ms must be greater than 0\n");
+        return;
+    }
+
+    // ответ: состояние и период светодиода
+    print_led_state();
+}
+
+
 
 static const api_command_t commands[] = {
     { "info",            "device passport",                          cmd_info            },
@@ -120,6 +193,10 @@ static const api_command_t commands[] = {
     { "calc_pi",         "calculate pi: calc_pi [terms]",            cmd_calc_pi         },
     { "main_time_exec",  "superloop iteration: average and maximum", cmd_main_time_exec  },
     { "main_time_reset", "reset maximum iteration",                  cmd_main_time_reset },
+    { "led_enable",      "turn led on",                          cmd_led_enable      },
+    { "led_disable",     "turn led off",                         cmd_led_disable     },
+    { "led_blink",       "blink the led",                            cmd_led_blink       },
+    { "led_period",      "set led blink period", cmd_led_period } ,
 };
 
 static const uint32_t command_count =

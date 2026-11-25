@@ -1,7 +1,7 @@
 #include "stdio-text-protocol.h"
 #include "pico/stdlib.h"
 #include <stdio.h>
-#include <string.h>
+
 
 #include "log.h" 
 #include "device.h"
