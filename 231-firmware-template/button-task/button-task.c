@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define BUTTON_DEBOUNCE_US 20000u
+
 #define PICO_BUTTON_PIN 15
 
 typedef enum {
@@ -19,6 +19,7 @@ typedef enum {
 static button_state_t button_state = RELEASED;
 static uint64_t start_time_us = 0;
 static uint32_t button_count = 0;
+static const uint64_t BUTTON_DEBOUNCE_US = 20000;
 
 void button_task_init(void)
 {
