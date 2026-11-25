@@ -13,6 +13,7 @@
 #include "device.h"
 #include "profiling.h"
 #include "led-task.h"
+#include "button-task.h"
 
 
 #ifndef CALC_PI_DEFAULT_TERMS
@@ -185,6 +186,14 @@ static void cmd_led_period(const command_t *command)
     print_led_state();
 }
 
+static void cmd_button(const command_t *command)
+{
+    (void)command;
+    bool pressed = button_task_is_pressed();
+    uint32_t count = button_task_get_press_count();
+    printf("button: %s, presses: %u\r\n",
+           pressed ? "pressed" : "released", (unsigned int)count);
+}
 
 
 static const api_command_t commands[] = {
@@ -197,6 +206,7 @@ static const api_command_t commands[] = {
     { "led_disable",     "turn led off",                         cmd_led_disable     },
     { "led_blink",       "blink the led",                            cmd_led_blink       },
     { "led_period",      "set led blink period", cmd_led_period } ,
+    { "button",    "get button status",                   cmd_button    },
 };
 
 static const uint32_t command_count =
