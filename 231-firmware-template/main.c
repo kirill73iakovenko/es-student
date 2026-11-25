@@ -3,6 +3,7 @@
 #include "pico/stdlib.h"
 #include "led-task.h"
 #include "button-task.h"
+#include "pi-task.h"
 #include "profiling.h"
 #include "api.h"
 #include "stdio-text-protocol.h"
@@ -26,6 +27,7 @@ int main(){
             }
         led_task_handle();
         button_task_handle();
+        pi_task_handle();
     }
    }
 
