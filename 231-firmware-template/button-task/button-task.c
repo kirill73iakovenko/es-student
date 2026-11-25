@@ -8,6 +8,13 @@
 #define BUTTON_DEBOUNCE_US 20000u
 #define PICO_BUTTON_PIN 15
 
+typedef enum {
+    RELEASED,
+    PRESSING,
+    PRESSED,
+    RELEASING
+} button_state_t;
+
 
 static button_state_t button_state = RELEASED;
 static uint64_t start_time_us = 0;

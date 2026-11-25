@@ -3,13 +3,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef enum {
-    RELEASED,
-    PRESSING,
-    PRESSED,
-    RELEASING
-} button_state_t;
-
 
 void button_task_init(void);
 void button_task_handle(void);
