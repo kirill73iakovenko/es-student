@@ -1,6 +1,9 @@
-#include <stdint.h>
-
 #pragma once
+
+
+#include <stdint.h>
+#include "pico/unique_id.h"
+
 
 
 #define DEVICE_NAME "es-led-module"
@@ -13,11 +16,20 @@
 #define DEVICE_BOARD "unknown"
 #endif
 
-void device_info(void);
-struct info_t
-{
-    uint32_t version;
-    char name[13];
-    uint8_t revision;
-};
+
+
+typedef struct {
+    const char *board;
+    char serial[PICO_UNIQUE_BOARD_ID_SIZE_BYTES * 2 + 1];
+    uint32_t manufacturer;
+    uint32_t part;
+    uint32_t revision;
+    const char *sdk_version;
+} device_info_t;
+
+void device_get_info(device_info_t *info);
+
+
+
+
 

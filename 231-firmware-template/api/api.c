@@ -49,10 +49,27 @@ typedef struct
     const char *help;
     api_callback_t callback;
 } api_command_t;
+
 static void cmd_info(const command_t *cmd)
 {
     (void)cmd;
-    device_info();
+
+    device_info_t info;
+    device_get_info(&info);
+
+    printf("name: %s\n", DEVICE_NAME);
+    printf("version: %s\n", FIRMWARE_VERSION);
+    printf("project: %s\n", DEVICE_PROJECT);
+    printf("repo: %s\n", DEVICE_REPO);
+    printf("board: %s\n", info.board);
+    printf("serial: %s\n", info.serial);
+
+    printf("chip: manufacturer 0x%03x, part 0x%04x, revision %u\n",
+           (unsigned)info.manufacturer,
+           (unsigned)info.part,
+           (unsigned)info.revision);
+
+    printf("pico-sdk: %s\n", info.sdk_version);
 }
 
 static void cmd_uptime(const command_t *cmd)
@@ -62,19 +79,6 @@ static void cmd_uptime(const command_t *cmd)
 }
 
 
-static void cmd_main_time_exec(const command_t *cmd)
-{
-    (void)cmd;
-    printf("iteration avg %.2f us, max %u us\r\n",
-           profiling_avg_us(), (unsigned)profiling_max_us());
-}
-
-static void cmd_main_time_reset(const command_t *cmd)
-{
-    (void)cmd;
-    profiling_reset_max();
-    printf("max reset\r\n");
-}
 
 static void print_led_state(void)
 {
@@ -217,12 +221,41 @@ static void cmd_pi(const command_t *command)
     }
 }
 
+static void cmd_profiling(const command_t *command)
+{
+    (void)command;
+
+    bool found = false;
+
+    for (uint32_t i = 0; i < PROFILING_STOPWATCH_COUNT; i++) {
+        profiling_result_t result;
+
+        if (profiling_get(i, &result)) {
+            found = true;
+
+            printf("%-10s count %-10u mean %.2f us  max %u us\n",
+                   result.name,
+                   (unsigned)result.count,
+                   result.mean_us,
+                   (unsigned)result.max_time_us);
+        }
+    }
+
+    if (!found) {
+        printf("profiling is disabled in this build\n");
+    }
+}
+
+static void cmd_profiling_reset(const command_t *command)
+{
+    (void)command;
+    profiling_reset();
+    printf("profiling: reset\r\n");
+}
 
 static const api_command_t commands[] = {
     { "info",            "device passport",                          cmd_info            },
     { "uptime",          "time since reset",                         cmd_uptime          },
-    { "main_time_exec",  "superloop iteration: average and maximum", cmd_main_time_exec  },
-    { "main_time_reset", "reset maximum iteration",                  cmd_main_time_reset },
     { "led_enable",      "turn led on",                          cmd_led_enable      },
     { "led_disable",     "turn led off",                         cmd_led_disable     },
     { "led_blink",       "blink the led",                            cmd_led_blink       },
@@ -230,6 +263,8 @@ static const api_command_t commands[] = {
     { "button",    "get button status",                   cmd_button    },
     { "pi_start", "start pi calculation", cmd_pi_start },
     { "pi",       "get pi result", cmd_pi       },
+    { "profiling",       "get profiling results",                    cmd_profiling       },
+    { "profiling_reset", "reset profiling results",                  cmd_profiling_reset },
 };
 
 static const uint32_t command_count =
