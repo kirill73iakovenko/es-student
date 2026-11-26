@@ -1,10 +1,9 @@
-#include "stdio-text-protocol.h"
+#include "stdio-text-protocol/stdio-text-protocol.h"
 #include "pico/stdlib.h"
 #include <stdio.h>
 
 
-#include "log.h" 
-#include "device.h"
+
 
 
 #define STDIO_TEXT_PROTOCOL_BS   0x08
@@ -26,7 +25,6 @@ void stdio_text_protocol_init(void)
     line_truncated = false;
     
     stdio_init_all();
-    LOG_INF("device: %s %s", DEVICE_PROJECT, FIRMWARE_VERSION);
 }
 
 

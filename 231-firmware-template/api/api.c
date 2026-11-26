@@ -7,14 +7,15 @@
 #include <ctype.h>     
 #include <errno.h>   
 
-#include "pico/time.h"
+#include "logging/log.h"
+#include "device/device.h"
+#include "profiling/profiling.h"
+#include "systime/systime.h"
 
-#include "log.h"
-#include "device.h"
-#include "profiling.h"
 #include "led-task.h"
 #include "button-task.h"
 #include "pi-task.h"
+#include "firmware.h"
 
 
 #ifndef CALC_PI_DEFAULT_TERMS
@@ -57,10 +58,10 @@ static void cmd_info(const command_t *cmd)
     device_info_t info;
     device_get_info(&info);
 
-    printf("name: %s\n", DEVICE_NAME);
+    printf("name: %s\n", FIRMWARE_NAME);
     printf("version: %s\n", FIRMWARE_VERSION);
-    printf("project: %s\n", DEVICE_PROJECT);
-    printf("repo: %s\n", DEVICE_REPO);
+    printf("project: %s\n", FIRMWARE_PROJECT);
+    printf("repo: %s\n", FIRMWARE_REPO);
     printf("board: %s\n", info.board);
     printf("serial: %s\n", info.serial);
 
@@ -75,7 +76,8 @@ static void cmd_info(const command_t *cmd)
 static void cmd_uptime(const command_t *cmd)
 {
     (void)cmd;
-    printf("uptime: %llu ms\n", time_us_64() / 1000);
+    uint64_t uptime_ms = systime_ms();
+    printf("uptime: %llu ms\n", (unsigned long long)uptime_ms);
 }
 
 
@@ -225,25 +227,21 @@ static void cmd_profiling(const command_t *command)
 {
     (void)command;
 
-    bool found = false;
+    #if PROFILING_ENABLED
+        for (uint32_t i = 0; i < PROFILING_STOPWATCH_COUNT; i++) {
+            profiling_result_t result;
 
-    for (uint32_t i = 0; i < PROFILING_STOPWATCH_COUNT; i++) {
-        profiling_result_t result;
-
-        if (profiling_get(i, &result)) {
-            found = true;
-
-            printf("%-10s count %-10u mean %.2f us  max %u us\n",
-                   result.name,
-                   (unsigned)result.count,
-                   result.mean_us,
-                   (unsigned)result.max_time_us);
+            if (profiling_get(i, &result)) {
+                printf("%-10s count %-10u mean %.2f us  max %u us\n",
+                    result.name,
+                    (unsigned)result.count,
+                    result.mean_us,
+                    (unsigned)result.max_time_us);
+            }
         }
-    }
-
-    if (!found) {
+    #else
         printf("profiling is disabled in this build\n");
-    }
+    #endif
 }
 
 static void cmd_profiling_reset(const command_t *command)

@@ -1,8 +1,8 @@
-#include "profiling.h"
+#include "profiling/profiling.h"
 #include "pico/stdlib.h"
 
 
-
+#if PROFILING_ENABLED
 
 // Внутреннее устройство секундомера
 typedef struct {
@@ -30,6 +30,9 @@ void profiling_stopwatch_init(uint32_t id, const char *name)
     stopwatches[id].max_us = 0;
     stopwatches[id].running = false;
 }
+
+
+
 
 void profiling_start(uint32_t id)
 {
@@ -105,3 +108,5 @@ void profiling_reset(void)
         stopwatches[i].running = false;
     }
 }
+
+#endif
